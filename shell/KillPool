@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+
+
+#victims=$(pvesh get /pools/$1 --output-format json | jq '.members' | grep -E "vmid|type" | awk '{print $2}' )
+mapfile -t victims < <( pvesh get /pools/$1 --output-format json | jq -r '.members[] | "\(.vmid) \(.type)"')
+
+i=0
+while [ $i -lt ${#victims[@]} ]
+do
+	echo "PAIR ${victims[$i]}"
+	read -r vmid type <<< "${victims[$i]}"
+	if [ $type == "lxc" ]; then
+	#	echo "LXC"
+		pct destroy $vmid
+	else
+		qm destroy $vmid
+	#	echo "QM"
+	fi
+	((i++))
+done
+
+pveum pool delete $1

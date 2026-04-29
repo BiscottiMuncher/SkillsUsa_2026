@@ -1,0 +1,231 @@
+id,challenge_id,content,state
+1,14,"OSINT Challenge — Solution Walkthrough (Kali Linux)
+
+1. Derive Password for Challenge1.zip
+
+Title:
+This is legal, right?
+
+Remove spaces:
+Thisislegal,right?
+
+Generate MD5:
+echo -n ""Thisislegal,right?"" | md5sum
+
+Password:
+69a443e9b57983498e3f2392bede4f42
+
+
+2. Extract Challenge Files
+
+7z x Challenge1.zip
+
+
+3. Identify APT Group (Q0)
+
+Open the leaked PDF or transcript.
+
+Look at the header:
+“Approved and formatted by Salt Typhoon for release”
+
+Answer:
+Salt Typhoon
+
+
+4. Find Initial Time Reference (Q1)
+
+Check the FIRST email in the thread.
+
+Timestamp shows:
+11:43 AM
+
+Answer:
+11:43 AM
+
+
+5. Identify Operating City (Q2)
+
+Review context across documents (emails + references).
+
+Location repeatedly points to:
+San Antonio
+
+Answer:
+San Antonio
+
+
+6. Determine Hand-off Location (Q3)
+
+Email mentions: google drive link near bottom, this link leads to a seperate document that shows the address of the warehouse for the handoff.
+
+Cross-reference with supporting material → full address:
+
+Answer:
+325 S Salado St
+
+
+7. Find Square Footage (Q4)
+
+Use the provided external reference (Google Drive / property data).
+
+Building size listed as:
+
+Answer:
+4,200
+
+
+8. Identify Nearest Train Station (Q5)
+
+Using the address (325 S Salado St), pivot to maps / OSINT lookup.
+
+Nearest station:
+
+Answer:
+Sunset Station
+
+
+9. Identify Nearby Risk (Q6)
+
+From the same location analysis:
+
+A nearby building that would expose the operation:
+
+Answer:
+Police Department
+
+
+10. Build Final Answer String
+
+Apply rules:
+- Remove spaces inside each answer
+- Keep capitalization
+... (20 lines left)",visible
+2,16,"Step 1: Unzip the given files, using the filenames as passwords (as hinted in the description).
+Step 2: Inspect the extracted images for hidden content. Even if the pictures look normal, check for data “behind” the image using tools like strings or tail in Linux;
+for Windows, you can open up the files in a web tool like Aperi'Solve or view the raw file content using an app like Notepad.
+Step 3: Recover the hidden flag fragments from each image and combine them in the correct order (the piece containing the closing brace } goes last) to form the complete flag.
+Step 4: Submit the reconstructed flag!",visible
+3,15,"Look for the HTTP GET request and corresponding server response with http filter. Right-click one of the related packets and choose Follow → TCP Stream. The full HTTP conversation will appear, including the HTML body of the response. Inside the response, the hidden flag can be seen",visible
+4,9,"Zoom Zoom Writeup
+
+Multiple ways to solve:
+
+Way 1:
+View properties and check comments: SkRNMjAxMVZyb29t
+next decode from base64 to get the flag: JDM2011Vroom
+
+Way 2: ExifTool
+open the image with EXIFtool in the XP comment field should have: SkRNMjAxMVZyb29t
+next decode from base64 to get the flag: JDM2011Vroom
+
+There are other ways to solve this challenge",visible
+5,10,"Vacation Writeup
+
+You might have tried a looking at the properties, exiftool, and picture analyzers.
+
+The tool that I would recommended is https://www.aperisolve.com/
+",visible
+6,6,"Surrounded Writeup by Pedro Gonzalez
+
+Step 1: View python script
+	- this script takes the array given and calculates the common differences
+
+Step 2: Run the script, this will show the differences of the numbers
+	- the original array and the first differences were carefully chosen so that the 2nd differences(final output) would be those exact numbers.
+
+Step 3: Use ascii to text decoder to reveal the meaning behind the numbers
+
+This flag reveals that the enemies were not able to get the top-secret intel as it was destroyed in time.",visible
+7,5,"Writeup by Pedro Gonzalez
+Original:
+
+Step 1. from morse code:
+
+Step 2. ROT13 brute force
+
+Step 3. From Hex
+
+FLAG",visible
+8,7,"Routes Writeup: 
+
+Original text:
+
+Mmva Daum oihaymuaeSnnc ecmote d2cm ft!lg oth   iams prehin1 ms o!f:sce t:Bamleeu  tna5eueyb
+  c rewseMpartsnc    ntlo HeRha Woer(uPti)oogtyfiiiuoehoo s
+ snos (l
+mnnhwwgnm trtuosclcuan)dslAmniefyag w e t0lihoapri nae oet 0
+m 2et se1 omdatcc1I7ni-
+
+Cipher text after applying rail fence cipher decoder with key of 10:
+
+My school is a commuter school
+We have two campuses: San Bernardino(Main campus) and Palm Desert(satellite campus)
+A common route connecting them in the 10fwy and 215 fwy
+Imagine commuting 72 miles if you went to both!!
+Here is the flag: Route-10
+
+Flag: ",visible
+9,4,"1. Original message:
+
+P qeuwpke hvdq hwqprivc 
+is wqvah lgesiru ikiraawirg
+at aapx eiaei csw crs jotikir
+hppk: wqvah-pgeri-fqvtzet
+
+2. Ciphertext decoded using vigenere cipher with key='peace':
+
+A message from humanity 
+to world leaders everywhere
+we want peace now and forever
+flag:
+
+
+3. Flag: ",visible
+10,3,"Standard Issued Writeup:
+
+General process
+
+Step1: Convert from binary
+ 
+01010100 01010111 00110001 01001010 01010100 01101100 01101100 01101100 01010101 00110010 01011010 01101010 01011001 01101101 00110101 01110000 01100001 01000111 00111001 01110110 01100011 01101110 01001010 01110110 01100100 01000111 01010110 01110110 01100001 00110000 00111000 00111101
+
+Step 2: Convert from Base64
+
+TW1JTlllU2ZjYm5paG9vcnJvdGVva08=
+
+Step 3: Caesar Box Cipher, box height = 4
+
+MmINYeSfcbnihoorroteokO
+
+Step 4: Flag
+
+
+Recommended tools: CyberChef",visible
+11,2,"In this challenge you have to reverse the hexadecimal data and also fix the file signature
+
+1) Use this line of python to reverse the order of file's data:
+
+python3 -c ""open('fixed.png','wb').write(open('desrever.jpg','rb').read()[::-1])
+
+2) Once the data has been reversed, you'll notice that the file signature is a JPEG. You'll want to use
+some program such as Hexedit or Bless to change the signature to a PNG. 
+
+3) Finally, open the image and record the flag. 
+",visible
+12,12,"Convert the file creation date that it saved in the file name to UNIX Epoch time
+
+Replace ` let seed = get_u_time();` with the converted epoch time
+- This will now pass in the EPOCH time you supplied it with instead of a random one
+
+Pass in the password from the SecurePassword file
+`./timeattack RpsEOHzKGC{Q^YYBmwT3_`
+
+check your answer in the `ENCRYPTED.txt`file",visible
+13,19,"Using NMAP or Telnet, perform a banner grab on the host
+
+In a terminal
+`telnet`
+`open 192.168.19.30 22`
+`OpenSSH_10.0p2 Debian-7`
+
+",visible
