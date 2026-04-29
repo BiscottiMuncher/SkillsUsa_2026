@@ -6,12 +6,12 @@ Mostly everything for SkillsUSA 2026
 ### challenges
 - All the challenge files from the 2026 competition
 - No servers files (xinit.d) are included as they have the flags in plain text (get owned scrapers)
-- 
+  
 ### guac
 - Script for guacamole setup, small readme
 
 ### kali
-- Currently empty, should populate with VNC script for later
+- Bad script, doesnt work
 
 ### popper
 - Collection of python sciripts,
