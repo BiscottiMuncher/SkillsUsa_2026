@@ -1,16 +1,12 @@
 # Skills2026
-Everything for SkillsUSA 2026 
+Mostly everything for SkillsUSA 2026 
 
 ---
 
 ### challenges
 - All the challenge files from the 2026 competition
 - No servers files (xinit.d) are included as they have the flags in plain text (get owned scrapers)
-
-### docs
-- Documents for installation and config specifically for Skills2026
-- Adding newer MD files into the mix with passwords removed
-
+- 
 ### guac
 - Script for guacamole setup, small readme
 
